@@ -12,16 +12,6 @@ class formclass{
 
     protected $errors = [];
 
-    protected static $attributes = [
-        'name',
-        'sname',
-        'email',
-        'phone',
-        'topic',
-        'paym',
-        'soglras',
-    ];
-
     public function has_errors(){
         return ! empty($this->errors);
     }
