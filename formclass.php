@@ -96,15 +96,16 @@ class formclass{
         }
     }
 
-    public function data_read(){
+   public function data_read(){
         $fp = fopen("logs/form1.txt", "r");
         $i=0;
         if ($fp) {
             while (!feof($fp)){
                 $str = fgets($fp, 999);
-                if(substr($str,-2,1)==1){
-                    $str1=substr($str,0,-2);
-                    echo "<input type='checkbox' name='f[]' value=".$str."><font color='blue'>".$str1."</font><br>";
+                $res = preg_replace("/ /","", $str);
+                if(substr($res,-2,1)==1){
+                    $str1=substr($res,0,-2);
+                    echo "<input type='checkbox' name='f[]' value=".$res."><font color='blue'>".$str1."</font><br>";
                 }
             }
         }
@@ -124,10 +125,10 @@ class formclass{
             for($i=0;$i<$n;$i++){
                 if(substr($af[$i],-1)==1){
                     for($j=0;$j<sizeof($file);$j++){
-                        $t1=explode("|", $file[$j]);
-                        $t2=explode("|", $af[$i]);
+                        $t1=explode(")", $file[$j]);
+                        $t2=explode(")", $af[$i]);
                         if($t1[0]==$t2[0]){
-                            $file[$j]=substr($af[$i],0,-1)."0\n";
+                            $file[$j]=substr($file[$j],0,-2)."0\n";
                             echo $file[$j]."<br>";
                             }
                         }
@@ -137,3 +138,4 @@ class formclass{
         }   
     }
 }
+
